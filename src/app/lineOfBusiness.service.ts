@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { LineOfBusiness } from './LineOfBusiness';
+import { LineOfBusinessQuote } from './LineOfBusinessQuote';
 import { MessageService } from './message.service';
 
 
@@ -12,6 +13,7 @@ import { MessageService } from './message.service';
 export class LineOfBusinessService {
 
   private lineOfBusinessUrl = 'api/linesOfBusiness';  // URL to web api
+  private lineOfBusinessQuoteUrl = 'api/recentQuotes';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,6 +30,27 @@ export class LineOfBusinessService {
         tap(_ => this.log('fetched lines of business')),
         catchError(this.handleError<LineOfBusiness[]>('getLinesOfBusiness', []))
       );
+  }
+
+  // Next two methods should ideally be moved in a separate service that would also contain implementation for Quotes CRUD operations
+  // However, since we don`t do CRUD operations with Quotes in this test project, just adding them here for convenience
+
+  /** GET lines of business quotes from the server */
+  getRecentQuotes(): Observable<LineOfBusinessQuote[]> {
+    return this.http.get<LineOfBusinessQuote[]>(this.lineOfBusinessQuoteUrl)
+      .pipe(
+        tap(_ => this.log('fetched lines of business quotes')),
+        catchError(this.handleError<LineOfBusinessQuote[]>('getRecentQuotes', []))
+      );
+  }
+
+  /** GET Quotes by its line of business by id. Will 404 if id not found */
+  getQuotesByLineOfBusinessId(id: number): Observable<LineOfBusinessQuote[]> {
+    const url = `${this.lineOfBusinessQuoteUrl}/?lineOfBusiness=${id}`;
+    return this.http.get<LineOfBusinessQuote[]>(url).pipe(
+      tap(_ => this.log(`fetched Quote for lineOfBusiness id=${id}`)),
+      catchError(this.handleError<LineOfBusinessQuote[]>(`getQuotesByLineOfBusinessId id=${id}`))
+    );
   }
 
   /** GET line of business by id. Return `undefined` when id not found */

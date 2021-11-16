@@ -1,0 +1,55 @@
+/* top lines of business private CSS styles */
+
+h2 {
+    text-align: left;
+  }
+
+  /* Tried to +- follow the visual look of styles previously declared in the dashboard component */
+  
+  .linesOfBuisness-menu {
+    padding: 0;
+    margin: auto;
+    max-width: 1000px;
+  
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+  }
+  
+  a {
+    background-color: #3f525c;
+    border-radius: 4px;
+    padding: 1rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    min-width: 300px;
+    margin: .10rem auto;
+    margin-right: .50rem;
+    box-sizing: border-box;
+  
+    /* flexbox */
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
+  }
+  
+  @media (min-width: 600px) {
+    a {
+      width: 18%;
+      box-sizing: content-box;
+    }
+  }
+  
+  a:hover {
+    background-color: black;
+  }
+
+  a.disabled {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: underline;
+}

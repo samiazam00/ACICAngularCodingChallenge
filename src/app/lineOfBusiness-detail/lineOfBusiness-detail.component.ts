@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { forkJoin } from 'rxjs';
 
 import { LineOfBusiness } from '../LineOfBusiness';
 import { LineOfBusinessService } from '../lineOfBusiness.service';
@@ -25,8 +26,14 @@ export class LineOfBusinessDetailComponent implements OnInit {
 
   getLineOfBusiness(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.lineOfBusinessService.getLineOfBusiness(id)
-      .subscribe(lineOfBusiness => this.lineOfBusiness = lineOfBusiness);
+    forkJoin([
+      this.lineOfBusinessService.getLineOfBusiness(id),
+      this.lineOfBusinessService.getQuotesByLineOfBusinessId(id) 
+    ]).subscribe(([lineOfBusinessResponse, quotesResponse]) => {
+      // This check of undefined quotes result will still allow to display rest of details information with just quotes number=0 in this exceptional case
+      lineOfBusinessResponse.quotes = quotesResponse == undefined ? 0 : quotesResponse.length;     
+      this.lineOfBusiness = lineOfBusinessResponse;
+    });
   }
 
   goBack(): void {

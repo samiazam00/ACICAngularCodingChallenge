@@ -12,12 +12,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(private lineOfBusinessService: LineOfBusinessService) { }
 
-  ngOnInit() {
-    this.getLinesOfBusiness();
-  }
-
-  getLinesOfBusiness(): void {
-    this.lineOfBusinessService.getLinesOfBusiness()
-      .subscribe(linesOfBusiness => this.linesOfBusiness = linesOfBusiness.slice(1, 4));
+  ngOnInit() {    
   }
 }

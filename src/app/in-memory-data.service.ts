@@ -27,7 +27,30 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 108, quoteNumber: 'AC127PC', lineOfBusiness: 15 }
     ];
 
-    return {linesOfBusiness};
+
+/*
+If I was looking at this requested test task in a real project, I would consider implementing a calculated property for the quotes number on the server side.
+One of the options is to do it in the ORM itself. As an alternative, inside the backend API somewhere.
+This gives a lot of benefits and reduces the needed amount of code on the client side, because client would receive already precalculated data.
+BTW, we do use this approach in our products, when such fields are part of ORM.
+For a demonstration, I will call this method #ServerSideCalculatedProperty.
+Using this would allow to keep the code behind in lineOfBusiness.service.ts, lineOfBusiness-detail.component.js as is, without any changes.
+Quotes number property value can be easily binded to the UI, for example in details screen.
+
+This code commented below could be used for a demonstration, just comment out the linesOfBuseness declared above, and uncomment this code below. 
+Plus, see the comments in top-lines-of-business.component.ts for the code that would be used in that case.
+*/    
+    /*
+    const linesOfBusiness = [
+      { id: 11, name: 'General Liability', description: 'Liability coverage for businesses.', quotes : recentQuotes.filter(x => x.lineOfBusiness==11).length },
+      { id: 12, name: 'Commercial Property', description: 'Property coverage for businesses.', quotes : recentQuotes.filter(x => x.lineOfBusiness==12).length },
+      { id: 13, name: 'Inland Marine', description: 'Coverage for tools and machinery on job sites.', quotes : recentQuotes.filter(x => x.lineOfBusiness==13).length },
+      { id: 14, name: 'Ocean Marine', description: 'Coverage for dock and boat repair businesses.', quotes : recentQuotes.filter(x => x.lineOfBusiness==14).length },
+      { id: 15, name: 'Garage', description: 'Coverage for auto repairs and car sales.', quotes : recentQuotes.filter(x => x.lineOfBusiness==15).length  }
+    ];
+*/
+
+    return {linesOfBusiness, recentQuotes};
   }
 
   // Overrides the genId method to ensure that a line of business always has an id.

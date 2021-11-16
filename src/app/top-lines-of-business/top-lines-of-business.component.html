@@ -1,0 +1,19 @@
+<h2>Popular Lines Of Business</h2>
+<div class="linesOfBusiness-menu">
+
+<!--
+  Tried to implement details page as some sort of modal operation
+  (It will not allow user to jump around, with exception of top navigation buttons 'Search' and 'View All Lines of Business', while working with a specific Line Of Business)
+  So, popular lines of business links will become disabled when user has opened some line of business details. 
+  User is supposed to use 'Go Back' or 'Save' buttnon to finish working with a single line of Business and that would re-enable the links.
+-->
+
+<a *ngFor="let lineOfBusiness of topTwoLinesOfBusiness"
+[attr.href]="isDisabled() ? null : '#'"
+[class.disabled]="isDisabled()"
+(click)="!isDisabled() && onClick(lineOfBusiness)"
+>
+  {{lineOfBusiness.name}} <br> ({{lineOfBusiness.quotes}} Quotes)
+</a>
+
+</div>

@@ -1,9 +1,8 @@
-<h2>Popular Lines Of Business</h2>
-<div class="linesOfBusiness-menu">
-  <a *ngFor="let lineOfBusiness of linesOfBusiness"
-      routerLink="/detail/{{lineOfBusiness.id}}">
-      {{lineOfBusiness.name}}
-  </a>
-</div>
+<!--
+Removed popular lines of business list from here,
+because here it was local to just this dashboard component and we need that list to be on every screen, not just this one.
+See top-lines-of-business.component for the implementation.
+-->
 
 <app-lineOfBusiness-search></app-lineOfBusiness-search>
+
