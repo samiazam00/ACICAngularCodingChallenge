@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LineOfBusiness } from '../LineOfBusiness';
 import { LineOfBusinessService } from '../lineOfBusiness.service';
+import { RecentQuotes } from '../RecentQuotes';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +10,8 @@ import { LineOfBusinessService } from '../lineOfBusiness.service';
 })
 export class DashboardComponent implements OnInit {
   linesOfBusiness: LineOfBusiness[] = [];
+  recentQuotes: RecentQuotes[] = [];
+  popularLines: LineOfBusiness[] = [];
 
   constructor(private lineOfBusinessService: LineOfBusinessService) { }
 
