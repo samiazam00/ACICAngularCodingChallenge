@@ -1,0 +1,26 @@
+/* quotesprivate CSS styles */
+.quotes {
+  margin: 2em 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 35em;
+  background-color: #EEE;
+  border-collapse: collapse;
+}
+
+.quotes td, .quotes th {
+  border: 1px solid  #405061;
+}
+/* show first two popular quotes */
+.quotes tr:nth-child(2) {
+  background: #8FBC8F;
+}
+
+.quotes tr:nth-child(3) {
+  background: #8FBC8F;
+}
+
+.quotes td:nth-child(2) {
+  text-align: center;
+}
+

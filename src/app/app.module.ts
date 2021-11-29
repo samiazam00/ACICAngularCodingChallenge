@@ -14,6 +14,7 @@ import { LineOfBusinessDetailComponent } from './lineOfBusiness-detail/lineOfBus
 import { LineOfBusinessComponent } from './linesOfBusiness/linesOfBusiness.component';
 import { LineOfBusinessSearchComponent } from './lineOfBusiness-search/lineOfBusiness-search.component';
 import { MessagesComponent } from './messages/messages.component';
+import { QuotesComponent } from './quotes/quotes.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { MessagesComponent } from './messages/messages.component';
     )
   ],
   declarations: [
+    QuotesComponent,
     AppComponent,
     DashboardComponent,
     LineOfBusinessDetailComponent,

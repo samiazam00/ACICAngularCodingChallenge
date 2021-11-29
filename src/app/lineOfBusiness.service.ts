@@ -3,15 +3,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { MessageService } from './message.service';
+import {forkJoin} from 'rxjs';
 
 import { LineOfBusiness } from './LineOfBusiness';
-import { MessageService } from './message.service';
-
+import { RecentQuotes } from './RecentQuotes';
 
 @Injectable({ providedIn: 'root' })
 export class LineOfBusinessService {
 
   private lineOfBusinessUrl = 'api/linesOfBusiness';  // URL to web api
+  private recentQuotesUrl = 'api/recentQuotes';  // URL to web api
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,6 +29,49 @@ export class LineOfBusinessService {
       .pipe(
         tap(_ => this.log('fetched lines of business')),
         catchError(this.handleError<LineOfBusiness[]>('getLinesOfBusiness', []))
+      );
+  }
+  /** GET combined quotes table from the server, could have created different service, but it is related here*/
+  getrecentQuotes(): Observable<any[]> {
+    let response1 = this.http.get<LineOfBusiness[]>(this.lineOfBusinessUrl)
+    let response2 = this.http.get<RecentQuotes[]>(this.recentQuotesUrl)
+    // Observable.forkJoin (RxJS 5) changes to just forkJoin() in RxJS 6
+    return forkJoin([response1, response2])
+      .pipe(
+  /* this block of code summaraizes both arrays of data by finding where they match by line of business id, groupby, and counts the occurances of quotes.
+     We could have chained all of them together but was broken up to show thought process.
+     we used type:any because we will check final type in indiviual components.
+  */    
+        //find where they match by lineOfBusiness id
+        map((data: any[]) => {
+          var sumArr= data[1].map((itm:any) => ({
+          ...data[0].find((item:any) => (itm.lineOfBusiness === item.id) && item),
+          ...itm
+        }));;
+          // groupby and count 
+          var groupArr = sumArr.reduce((a: any, b: any) => {
+            var name = b.name;
+              if (!a.hasOwnProperty(name)) {
+                a[name] = 0;
+              }
+            a[name]++;
+            return a;
+          }, {});
+          // add key value pairs
+          var countArr = Object.keys(groupArr).map((k: any) => {
+            return { name: k, count: groupArr[k],id:0};
+          });
+          // adding line of buisness id for line of buisness details to find easier
+          var anotherArr = data[0].map((k: any) => {
+            return { id: k.id };
+          });
+          countArr.forEach((item, i) => {
+            item.id = anotherArr[i].id;
+          });
+          return countArr;
+        }),
+        tap(_ => this.log('fetched recentQuotes')),
+        catchError(this.handleError<any[]>('recentQuotes', []))
       );
   }
 
