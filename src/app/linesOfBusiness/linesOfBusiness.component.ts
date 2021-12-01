@@ -10,6 +10,8 @@ import { LineOfBusinessService } from '../lineOfBusiness.service';
 })
 export class LineOfBusinessComponent implements OnInit {
   linesOfBusiness: LineOfBusiness[] = [];
+  topTwoLinesOfBusiness: LineOfBusiness[] = [];
+  lowTwoLinesOfBusiness: LineOfBusiness[] = [];
 
   constructor(private lineOfBusinessService: LineOfBusinessService) { } 
 
@@ -21,6 +23,16 @@ export class LineOfBusinessComponent implements OnInit {
     this.lineOfBusinessService.getLinesOfBusiness()
     .subscribe(linesOfBusiness => this.linesOfBusiness = linesOfBusiness);
   }
+
+  // Getting the top two lines of business
+getTopTwoLineOfBusiness(): void{
+  this.topTwoLinesOfBusiness = this.linesOfBusiness.sort((a,b) => b.quotes - a.quotes).slice(0,2);
+}
+
+// Getting the two least popular lines of business
+getLowTwoLineOfBusiness(): void{
+  this.lowTwoLinesOfBusiness = this.linesOfBusiness.sort((a,b) => a.quotes - b.quotes).slice(0,2);
+}
 
   add(name: string, description: string): void {
     name = name.trim();
