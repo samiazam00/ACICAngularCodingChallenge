@@ -15,7 +15,7 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 103, quoteNumber: 'AC125PC', lineOfBusiness: 13 },
       { id: 104, quoteNumber: 'AC126PC', lineOfBusiness: 14 },
       { id: 105, quoteNumber: 'AC127PC', lineOfBusiness: 15 },
-      { id: 106, quoteNumber: 'AC125PC', lineOfBusiness: 13 }, //aight so theres 3 13's, 2 15'2, and 1*(11,12,14)
+      { id: 106, quoteNumber: 'AC125PC', lineOfBusiness: 13 }, // so theres 3 13's, 2 15'2, and 1*(11,12,14)
       { id: 107, quoteNumber: 'AC126PC', lineOfBusiness: 13 },
       { id: 108, quoteNumber: 'AC127PC', lineOfBusiness: 15 }
     ];
@@ -57,10 +57,10 @@ export class InMemoryDataService implements InMemoryDbService {
 // }
 // ];
 
-// so I made this above but I'm pretty sure this isnt how angular works, but this is how i would've made a counter variable in something like python or matlab. Its fairly rudamentary, 
-// I know, but its straightforward.  It just goes through the arrays or objects (lines of business and recent quotes in this case), and finds where the id's math the line of business.
+// so I made this above but I'm pretty sure this isnt how angular works, but this is how i would've made a counter variable in something like python or matlab. I know its fairly rudamentary, 
+// but its straightforward.  It just goes through the arrays or objects (lines of business and recent quotes in this case), and finds where the id's match the line of business.
 // Then its just reads the length of the array and boom, youve got the number of times the line of business was quoted.  I think for this assignment though, at least in this case, I'll
-// stick with a function that works for angular and is a little more slick. I dont know how searching functions in angular work, but I'm sure i can figure something out.
+// stick with a function that works for angular and is a little more slick until I have a better understanding of typescript
 
 // ********************************************************************************************************************************************************
 // ********************************************************************************************************************************************************
