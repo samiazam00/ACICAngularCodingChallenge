@@ -2,6 +2,20 @@
 <nav>
   <a routerLink="/dashboard">Search</a>
   <a routerLink="/linesOfBusiness">View All Lines Of Business</a>
+
+
+<div>Top Two Lines of business</div>
+<div *ngFor ="let linesOfbusiness of topTwoLinesOfBusiness">
+
+  {{linesOfBusiness.name}}, Quotes: {{linesOfBusiness.quotes}}
+<!-- just hits a quick loop through the 2 row vector and displays them -->
+</div>
+  
 </nav>
+
+
+
+
+
 <router-outlet></router-outlet>
 <app-messages></app-messages>
