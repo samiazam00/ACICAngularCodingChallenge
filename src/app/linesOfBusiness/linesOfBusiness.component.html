@@ -13,14 +13,24 @@
   </button>
 </div>
 
-<ul class="linesOfBusiness">
-  <li *ngFor="let lineOfBusiness of linesOfBusiness">
-    <a routerLink="/detail/{{lineOfBusiness.id}}">
+<!-- for coding challenge:
+   modify display so that you can choose to list the lines by id or by popularity (numQuotes)
+-->
+<div>
+  <label> Business Lines </label> 
+  <nav> 
+    <button (click)="sortByID()">Sort By ID</button>
+    <button (click)="sortByPopularity()"> Sort By Popularity</button>
+  </nav>
+  <ul class="linesOfBusiness">
+    <li *ngFor="let lineOfBusiness of linesOfBusiness">
+      <a routerLink="/detail/{{lineOfBusiness.id}}">
+        
+        <span class="badge">{{lineOfBusiness.id}}</span> {{lineOfBusiness.name}} - {{lineOfBusiness.description}}
+      </a>
+      <button class="delete" title="delete lineOfBusiness"
+        (click)="delete(lineOfBusiness)">x</button>
       
-      <span class="badge">{{lineOfBusiness.id}}</span> {{lineOfBusiness.name}} - {{lineOfBusiness.description}}
-    </a>
-    <button class="delete" title="delete lineOfBusiness"
-      (click)="delete(lineOfBusiness)">x</button>
-    
-  </li>
-</ul>
+    </li>
+  </ul>
+</div>
