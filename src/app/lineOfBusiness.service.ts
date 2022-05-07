@@ -6,12 +6,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { LineOfBusiness } from './LineOfBusiness';
 import { MessageService } from './message.service';
+import { RecentQuotes } from './quotes/RecentQuotes';
 
 
 @Injectable({ providedIn: 'root' })
 export class LineOfBusinessService {
 
   private lineOfBusinessUrl = 'api/linesOfBusiness';  // URL to web api
+  private quotesUrl = 'api/recentQuotes';  
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -66,6 +68,14 @@ export class LineOfBusinessService {
       catchError(this.handleError<LineOfBusiness[]>('searchLinesOfBusiness', []))
     );
   }
+
+    /** GET recent quote data for all lines */
+    getRecentQuotes(): Observable<RecentQuotes[]> {
+      return this.http.get<RecentQuotes[]>(this.quotesUrl).pipe(
+        tap(_ => this.log('fetched quote list')),
+        catchError(this.handleError<RecentQuotes[]>('getRecentQuotes', []))
+      );
+    }
 
   //////// Save methods //////////
 
