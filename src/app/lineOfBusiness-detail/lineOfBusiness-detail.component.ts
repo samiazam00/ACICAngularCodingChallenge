@@ -43,8 +43,8 @@ export class LineOfBusinessDetailComponent implements OnInit {
         this.lineOfBusiness = lineOfBusiness;
         let quoteCount = 0;
         quotesList.forEach(q =>  { // check each quote in the list of all quotes
-          if (q.lineOfBusiness == id) { // increment counter if quote found in list asscoated with this line's id
-            quoteCount+=1; 
+          if (q.lineOfBusiness === id) { // increment counter if quote found in list asscoated with this line's id
+            quoteCount += 1; 
           }
         })
         lineOfBusiness.numQuotes = quoteCount; 
