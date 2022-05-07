@@ -1,9 +1,4 @@
-/* DashboardComponent's private CSS styles */
-
-/* for coding challenge, all the dashboard info (except the search feature) 
- * was moved over to the popular-info component. so this info is no longer needed 
- * and is just being kept here as a reference
- */
+/* PopularInfo's private CSS styles - borrowed from Dashboard */
 
 h2 {
   text-align: center;

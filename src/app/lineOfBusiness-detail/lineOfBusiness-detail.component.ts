@@ -39,7 +39,7 @@ export class LineOfBusinessDetailComponent implements OnInit {
     forkJoin([
         this.lineOfBusinessService.getLineOfBusiness(id),
         this.lineOfBusinessService.getRecentQuotes(),
-      ]).subscribe(([lineOfBusiness, quotesList]) => {   
+      ]).subscribe(([lineOfBusiness, quotesList]) => {
         this.lineOfBusiness = lineOfBusiness;
         let quoteCount = 0;
         quotesList.forEach(q =>  { // check each quote in the list of all quotes
@@ -49,7 +49,6 @@ export class LineOfBusinessDetailComponent implements OnInit {
         })
         lineOfBusiness.numQuotes = quoteCount; 
       });
-
   }
 
   goBack(): void {
